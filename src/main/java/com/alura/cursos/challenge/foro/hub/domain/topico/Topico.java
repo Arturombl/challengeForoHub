@@ -28,10 +28,9 @@ public class Topico {
     private String titulo;
 
     private String mensaje;
-    @Future
     private LocalDateTime fecha;
-    private Boolean status;
-    private String autor;
+//    private Boolean status;
+//    private String autor;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id")
@@ -44,4 +43,11 @@ public class Topico {
     @OneToMany(mappedBy = "topico", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Respuesta> respuestas = new ArrayList<>();
 
+    public Topico(String titulo, String mensaje, LocalDateTime fecha, Usuario usuario, Curso curso) {
+        this.titulo = titulo;
+        this.mensaje = mensaje;
+        this.fecha = fecha;
+        this.usuario = usuario;
+        this.curso = curso;
+    }
 }
