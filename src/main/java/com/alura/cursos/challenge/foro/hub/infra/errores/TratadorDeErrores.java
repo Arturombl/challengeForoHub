@@ -1,6 +1,6 @@
 package com.alura.cursos.challenge.foro.hub.infra.errores;
 
-import com.alura.cursos.challenge.foro.hub.domain.topico.ValidacionDeIntegradad;
+import com.alura.cursos.challenge.foro.hub.domain.topico.ValidacionDeIntegridad;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ValidationException;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +23,7 @@ public class TratadorDeErrores {
         return ResponseEntity.badRequest().body(errores);
     }
 
-    @ExceptionHandler(ValidacionDeIntegradad.class)
+    @ExceptionHandler(ValidacionDeIntegridad.class)
     public ResponseEntity errorHandlerValidacionesDeIntegridad(Exception e){
         return ResponseEntity.badRequest().body(e.getMessage());
     }
@@ -38,4 +38,5 @@ public class TratadorDeErrores {
             this(error.getField(), error.getDefaultMessage());
         }
     }
+
 }

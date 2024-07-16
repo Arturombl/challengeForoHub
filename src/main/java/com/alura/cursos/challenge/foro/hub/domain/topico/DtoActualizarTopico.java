@@ -3,16 +3,13 @@ package com.alura.cursos.challenge.foro.hub.domain.topico;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record DtoRegistroTopico(
+import java.time.LocalDateTime;
 
-        @NotBlank
+public record DtoActualizarTopico(
         String titulo,
-        @NotNull
         String mensaje,
-        @NotNull
         String curso,
-        @NotNull
         String usuario,
-        Boolean estado
+        LocalDateTime fecha
 ) {
 }

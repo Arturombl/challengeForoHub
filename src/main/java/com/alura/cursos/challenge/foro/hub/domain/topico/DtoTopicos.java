@@ -10,8 +10,7 @@ public record DtoTopicos(
         String titulo,
         String mensaje,
         LocalDateTime fecha,
-//        Boolean status,
-//        String autor,
+        Boolean estado,
         Usuario usuario,
         Curso curso
 ) {

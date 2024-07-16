@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
-public class RegistrarTopicoServices {
+public class TopicoServices {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -30,18 +30,19 @@ public class RegistrarTopicoServices {
     public DetallesDeTopico registrar(DtoRegistroTopico dtoRegistroTopico){
         System.out.println(dtoRegistroTopico);
         if (!usuarioRepository.buscarPorNombre(dtoRegistroTopico.usuario()).isPresent()){
-            throw new ValidacionDeIntegradad("Este id para usuario no fue encontrado");
+            throw new ValidacionDeIntegridad("Este id para usuario no fue encontrado");
         }
         if (!cursoRepository.buscarPorNombre(dtoRegistroTopico.curso()).isPresent()){
-            throw new ValidacionDeIntegradad("Este id para curso no fue encontrado");
+            throw new ValidacionDeIntegridad("Este id para curso no fue encontrado");
         }
 
         validador.forEach(v-> v.validar(dtoRegistroTopico));
 
+        var estado = true;
         var curso = cursoRepository.buscarPorNombre(dtoRegistroTopico.curso()).get();
         var usuario = usuarioRepository.buscarPorNombre(dtoRegistroTopico.usuario()).get();
         var fechaActual = LocalDateTime.now();
-        var topico = new Topico(dtoRegistroTopico.titulo(), dtoRegistroTopico.mensaje(), fechaActual, (Usuario) usuario, (Curso) curso);
+        var topico = new Topico(dtoRegistroTopico.titulo(), dtoRegistroTopico.mensaje(), fechaActual, estado, (Usuario) usuario, (Curso) curso);
 
         topicoRepository.save(topico);
         var formatter = DateTimeFormatter.ofPattern("yyyyMMdd HH:mm:ss");
@@ -49,4 +50,11 @@ public class RegistrarTopicoServices {
 
         return DetallesDeTopico.fromTopico(topico, fechaFormateada);
     }
+
+    public void validarTopico(Long id) {
+        if (!topicoRepository.findById(id).isPresent()) {
+            throw new ValidacionDeIntegridad("Topico no encontrado");
+        }
+    }
+
 }

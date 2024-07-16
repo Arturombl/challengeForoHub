@@ -3,7 +3,6 @@ package com.alura.cursos.challenge.foro.hub.domain.topico;
 import com.alura.cursos.challenge.foro.hub.domain.curso.Curso;
 import com.alura.cursos.challenge.foro.hub.domain.usuario.Usuario;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Future;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -29,7 +28,7 @@ public class Topico {
 
     private String mensaje;
     private LocalDateTime fecha;
-//    private Boolean status;
+    private Boolean estado;
 //    private String autor;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -43,11 +42,24 @@ public class Topico {
     @OneToMany(mappedBy = "topico", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Respuesta> respuestas = new ArrayList<>();
 
-    public Topico(String titulo, String mensaje, LocalDateTime fecha, Usuario usuario, Curso curso) {
+    public Topico(String titulo, String mensaje, LocalDateTime fecha,Boolean estado, Usuario usuario, Curso curso) {
         this.titulo = titulo;
         this.mensaje = mensaje;
         this.fecha = fecha;
+        this.estado = estado;
         this.usuario = usuario;
         this.curso = curso;
+    }
+
+    public void actualizarDatos(DtoActualizarTopico dtoActualizarTopico, LocalDateTime fecha) {
+        if (dtoActualizarTopico.titulo() != null){
+            this.titulo = dtoActualizarTopico.titulo();
+        }
+        if (dtoActualizarTopico.mensaje() != null){
+            this.mensaje = dtoActualizarTopico.mensaje();
+        }
+        if (dtoActualizarTopico.fecha() != null){
+            this.fecha = fecha;
+        }
     }
 }
