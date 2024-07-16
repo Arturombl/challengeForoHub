@@ -3,7 +3,6 @@ package com.alura.cursos.challenge.foro.hub.infra.security;
 
 
 import com.alura.cursos.challenge.foro.hub.domain.usuario.Usuario;
-import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
@@ -15,7 +14,6 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
-import static org.springframework.security.config.Elements.JWT;
 
 @Service
 public class TokenService {

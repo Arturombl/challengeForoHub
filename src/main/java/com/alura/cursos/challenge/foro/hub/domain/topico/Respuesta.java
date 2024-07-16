@@ -1,6 +1,5 @@
 package com.alura.cursos.challenge.foro.hub.domain.topico;
 
-import com.alura.cursos.challenge.foro.hub.domain.curso.Curso;
 import com.alura.cursos.challenge.foro.hub.domain.usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,7 +7,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Table(name = "respuestas")
